@@ -12,6 +12,7 @@ configurationfile
 
 program:
 'PROGRAM' name=ID
+type_blocks+=type_block*
 var_blocks+=var_block*
 program_block_body
 'END_PROGRAM';
@@ -45,6 +46,10 @@ time_unit:
 program_configuration:
 'PROGRAM' inst_name=ID 'WITH' task_name=ID ':' prog_name=ID;
 
+type_block locals[boolean input, boolean output, boolean temp]
+: ('VAR')
+( types+=type_declaration* ';' 'END_TYPE');
+
 var_block locals[boolean input, boolean output, boolean temp]
 : ('VAR'
 | { $input=True; } 'VAR_INPUT'
@@ -53,6 +58,9 @@ var_block locals[boolean input, boolean output, boolean temp]
 
 type_rule:
 name=ID #simpleType;
+
+type_declaration:
+names+=ID (',' names+=ID)*;
 
 variable_declaration:
 names+=ID (',' names+=ID)* ':' var_type=type_rule ;

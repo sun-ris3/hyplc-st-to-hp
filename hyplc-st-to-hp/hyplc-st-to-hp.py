@@ -25,13 +25,14 @@ def process_st_file(st_file):
 
 if __name__ == '__main__':
 	parser = argparse.ArgumentParser(description='HyPLC ST to HP translation tool.')
-	parser.add_argument('-STFile','--STFile', help='Input ST file to be translated', required=True)
+	#parser.add_argument('-STFile','--STFile', help='Input ST file to be translated', required=True)
 	parser.add_argument('-HPFile','--HPFile', help='HP file where ctrl will be replaced with translation', required=False)
 
 	args = vars(parser.parse_args())
 
     # Currently only process one ST file with one Program defined at a time
-	process_st_file(args['STFile'])
+	#process_st_file(args['STFile'])
+	process_st_file('examples/water-treatment-proc-1.st')
 
 	# Iterate through all structured text programs and generate a hybrid program
 	# (for this implementation, we are only generating one):
